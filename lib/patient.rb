@@ -18,4 +18,13 @@ class Patient
     end
     patients
   end
+
+  define_method(:save) do
+    DB.exec("INSERT INTO patients (pat_name, bday, doc_id) VALUES ('#{@pat_name}', '#{@bday}', #{@doc_id});")
+  end
+
+  define_method(:==) do |dup_pat|
+    self.pat_name().==(dup_pat.pat_name()).&(self.bday().==(dup_pat.bday())).&(self.doc_id().==(dup_pat.doc_id()))
+  end
+
 end
