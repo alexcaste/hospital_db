@@ -1,9 +1,10 @@
 class Specialty
+
   attr_reader(:spec_name, :id)
 
   define_method(:initialize) do |attributes|
-    @spec_name = attributes.fetch("spec_name")
-    @id = attributes.fetch("id").to_i()
+    @spec_name = attributes.fetch(:spec_name)
+    @id = attributes.fetch(:id).to_i()
   end
 
 
@@ -13,7 +14,7 @@ class Specialty
       returned_spec.each() do |spec_obj|
         spec_name = spec_obj.fetch("spec_name")
         id = spec_obj.fetch("id").to_i()
-        specialties.push(Specialty.new({:spec_name => doc_name, :id =>id}))
+        specialties.push(Specialty.new({:spec_name => spec_name, :id =>id}))
       end
       specialties
     end
@@ -30,7 +31,7 @@ class Specialty
     define_singleton_method(:find) do |spec_id|
       search_spec = nil
       Specialty.all().each() do |spec_obj|
-        if spec_obj.id() == id
+        if spec_obj.id() == spec_id
           search_spec = spec_obj
         end
       end
@@ -43,9 +44,10 @@ class Specialty
       doc_table.each() do |doc_obj|
         doc_name = doc_obj.fetch("doc_name")
         spec_id = doc_obj.fetch("spec_id").to_i()
-        returned_doc.push(Doctor.new({:doc_name => doc_name, :spec_id => spec_id}))
+        id = doc_obj.fetch("id").to_i()
+        returned_docs.push(Doctor.new({:doc_name => doc_name, :spec_id => spec_id, :id => id}))
       end
-      returned_doc
+      returned_docs
     end
 
   # #SELECT doc_id, COUNT (*) FROM patients GROUP BY doc_id ORDER BY COUNT(*) DESC

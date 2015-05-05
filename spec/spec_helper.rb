@@ -3,6 +3,7 @@ require("pg")
 require("patient")
 require('doctor')
 require('pry')
+require('specialties')
 
 DB = PG.connect({:dbname => 'hospital_test'})
 
