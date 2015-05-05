@@ -2,6 +2,7 @@ require("rspec")
 require("pg")
 require("patient")
 require('doctor')
+require('pry')
 
 DB = PG.connect({:dbname => 'hospital_test'})
 
