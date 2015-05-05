@@ -14,7 +14,7 @@ class Doctor
     returned_doctors.each() do |doc_obj|
       doc_name = doc_obj.fetch("doc_name")
       spec_id = doc_obj.fetch("spec_id").to_i()
-      id = doc_obj.fetch("id")
+      id = doc_obj.fetch("id").to_i()
       doctors.push(Doctor.new({:doc_name => doc_name, :spec_id => spec_id, :id =>id}))
     end
     doctors
@@ -32,7 +32,7 @@ class Doctor
   define_singleton_method(:find) do |doc_id|
     search_doc = nil
     Doctor.all().each() do |doc_obj|
-      if doc_obj.id().to_i() == doc_id
+      if doc_obj.id() == doc_id
         search_doc = doc_obj
       end
     end
@@ -41,7 +41,7 @@ class Doctor
 
   define_method(:all_pats) do
     returned_pats = []
-    pat_table = DB.exec("SELECT * FROM patients WHERE doc_id = #{self.id()};")
+    pat_table = DB.exec("SELECT * FROM patients WHERE doc_id = #{self.id()} ORDER BY bday ASC;")
     pat_table.each() do |pat_obj|
       pat_name = pat_obj.fetch("pat_name")
       bday = pat_obj.fetch("bday")

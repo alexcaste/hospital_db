@@ -31,4 +31,15 @@ describe(Doctor) do
       expect(Doctor.find(test_doc2.id())).to(eq(test_doc2))
     end
   end
+
+  describe("#all_pats") do
+    it("finds a all patients with a matching doctor id and returns an array of the patients") do
+      test_doc = Doctor.new({:doc_name => "Bubba", :spec_id => 1, id: nil})
+      test_doc.save()
+      id = test_doc.id()
+      test_pat = Patient.new({:pat_name => "Snoop", :bday => '2015-01-01', :doc_id => id})
+      test_pat.save()
+        expect(test_doc.all_pats()).to(eq([test_pat]))
+    end
+  end
 end
