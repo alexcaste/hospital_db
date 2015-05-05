@@ -7,4 +7,10 @@ describe(Doctor) do
       expect(test_doc.doc_name()).to(eq('Bubba'))
     end
   end
+
+  describe('.all') do
+    it('returns an empty array') do
+      expect(Doctor.all()).to(eq([]))
+    end
+  end
 end
